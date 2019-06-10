@@ -1,0 +1,116 @@
+CAMERA CALIBRATION TOOLBOX FOR GENERIC LENSES 
+Version 2.3
+ 
+(4th November 2007)
+
+Copyright (C) 2004-2007 Juho Kannala
+
+
+
+Introduction
+------------
+
+This is a camera calibration toolbox for generic lenses. The toolbox can be used to calibrate conventional, 
+wide-angle and fish-eye lens cameras. The calibration is based on viewing a planar calibration object.
+The intrinsic and extrinsic camera parameters are estimated from control point correspondences between 
+the calibration plane and calibration images. This toolbox is a result of research that has been carried out 
+in the Laboratory of Computational Engineering at the Helsinki University of Technology and 
+in the Machine Vision Group at the University of Oulu.
+
+
+License
+-------
+ 
+This software is distributed under the GNU General Public Licence (version 2 or later); 
+please refer to the file Licence.txt, included with the software, for details. 
+
+
+
+Installation
+------------
+
+Copy all the m-files into a directory and add it to your MATLABPATH. Matlab version 6.5 or later 
+with the Image Processing Toolbox and Optimization Toolbox is required.
+
+
+
+Usage
+-----
+
+There are two ways of using the toolbox: 
+
+1. Given the point correspondences between the calibration plane and calibration images one may directly 
+   compute the camera parameters as follows.
+  
+   (*) First fill in all the necessary information in calibconfig.m. Then run CALIBRATE with the correspondences 
+       as input. See HELP CALIBRATE for more information.
+
+ 
+2. If a calibration pattern with circular control points is used, one may extract the centroids of the projected circles 
+   from the calibration images by using an interactive procedure. After this the camera parameters may be computed.
+
+   (*) First fill in all the information in calibconfig.m. Then run functions CALIBIMAGES and CALIBRATE 
+       (without any input arguments) in the same directory where your calibration images are.
+  
+
+
+Main functions
+--------------
+
+CALIBCONFIG
+   All information about the calibration images and the camera must be given in file calibconfig.m.
+
+CALIBIMAGES
+   An interactive procedure for preprocessing of calibration images. Requires the user to indicate a convex polygon in each
+   image that encloses the calibration pattern. The area inside the polygon should contain a rectangular grid of circular 
+   control points and nothing else. Either white circles on black background or black circles on white background may be used.
+
+CALIBRATE
+   computes the optimal camera parameters. The number of parameters in the camera model may be chosen in calibconfig.m. 
+   The correspondences between the calibration plane and the calibration images may be given as input. Otherwise they are read 
+   from the files printed out by CALIBIMAGES. The estimated internal camera parameters are saved into a mat-file.
+
+BACKPROJECT
+   The backward camera model. After the calibration this function may be used to compute the directions of back-projected 
+   rays corresponding to given image points.
+
+UNDISTORT
+   transforms the original distorted images to follow perspective projection.  
+
+CALIBRATEEXTERNAL 
+   computes the pose of the camera with respect to the calibration plane. This is useful when the camera is already calibrated 
+   and one needs to compute its pose in a coordinate frame which is fixed to a reference plane. 
+
+
+Demo
+----
+
+Extract the files from fisheyedemo.tar.gz into a directory and run function FISHEYEDEMO.
+
+
+
+Version history
+----------------
+
+Version 2.3
+
+- Some changes to CALIBRATE and its subprocedures
+- Added the parameter sys.cata to CALIBCONFIG
+
+Version 2.2
+
+- The functions UNDISTORT and CALIBRATEEXTERNAL have been added.
+- A bug in file backprojectsymmetric.m has been fixed. Now the backprojection works faster.  
+
+Version 2.1
+
+- The toolbox does not require the Statistics toolbox any more.
+- In the preprocessing step the interactive threshold adjustment may be skipped (does not work in earlier version of Matlab).  
+
+Version 2.0 
+
+- The interactive preprocessing of calibration images has been improved. Now user may adjust the grayscale threshold 
+  that is used to extract the circular control points.
+- The calibration algorithm has changed. The current implementation should work better for lenses having a field of view 
+  significantly over 180 degrees.
+
