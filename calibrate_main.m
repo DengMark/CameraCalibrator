@@ -545,6 +545,7 @@ for i=1:n_error
     error_p(i)=mean(err{1,i});
 end
 axes(handles.projerr_graph);
+cla reset;
 bar(handles.projerr_graph,error_p,'c');
 hold on
 xlim=get(gca,'Xlim');
