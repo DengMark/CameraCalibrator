@@ -35,6 +35,7 @@ if intplen<PLEN
   intp((intplen+1):PLEN)=1e-7;%0;
 end
 par0=[intp; extp];
+par0=par0(2:end);
 
 %keyboard
 %save par0_v22 par0
@@ -60,7 +61,8 @@ else
   
 end
 
-p=par(1:PLEN);
+p=[1;par(1:PLEN-1)];
+par=[1;par];
 
 for i=1:N
   count=PLEN+1+(i-1)*6;

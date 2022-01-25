@@ -12,13 +12,14 @@ function d=projerr_dh(par,ms,xs,PLEN)
 
 N=length(ms);
 
-p=par(1:PLEN);
+p=[1;par(1:PLEN-1)];
+par_aux=[1;par];
 d=[];
 
 for i=1:N
   count=PLEN+1+(i-1)*6;
-  rotvect=par(count:count+2);
-  ti=par(count+3:count+5);
+  rotvect=par_aux(count:count+2);
+  ti=par_aux(count+3:count+5);
   
   Ri=rotationmat(rotvect);  %轴角表示到旋转矩阵表示
 

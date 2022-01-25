@@ -18,7 +18,7 @@ global principalPoint f_dxdy
 if strcmp(sys.projtype,'perspective')
   persp=sys.focal*tan(theta);
   [k,mres]=polyfitoddlsq_dh(theta,persp,3);
-  k1=k(3); k2=k(1);
+  k1=k(1); k2=k(3);
 elseif strcmp(sys.projtype,'stereographic')
   stereog=2*sys.focal*tan(theta/2);
   [k,mres]=polyfitoddlsq_dh(theta,stereog,3);

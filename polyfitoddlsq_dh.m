@@ -19,9 +19,9 @@ function [p, mres,a]=polyfitoddlsq_dh(x,y,n)
 % Licence (version 2 or later); please refer to the file
 % Licence.txt, included with the software, for details.
 
-x=x(:); y=y(:);
+x=x(:); y=y(:)-x(:);
 M=length(x);
-pows=1:2:n;
+pows=3:2:n;
 nodd=length(pows);
 X=[];
 for i=pows
@@ -36,6 +36,8 @@ counter=0;
 for i=1:(n+1)
   if 2*floor(i/2)==i
     p(i)=0;
+  elseif i == 1
+    p(i)=1;
   else
     p(i)=a(nodd-counter);
     counter=counter+1;
