@@ -49,8 +49,8 @@ options=optimset('LargeScale','off','Algorithm','levenberg-marquardt','Display',
 % disp('Control point radius:');
 % disp(radius);
 
-%lb=[];
-lb = ones(size(par0))*-inf; lb(1)=0;
+lb=[];
+%lb = ones(size(par0))*-inf; lb(1)=0;
 %lb(2) = 600;lb(3)=600;
 
 if isempty(radius) | radius==0
