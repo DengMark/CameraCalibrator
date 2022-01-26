@@ -455,7 +455,7 @@ global p Rs ts err
   mv=1.0/str2double(handles.dy.String);
   u0=str2double(handles.u0.String);
   v0=str2double(handles.v0.String);
-  sys.pixelp=[mu mv u0 v0]; % values for the parameters m_u m_v u_0 v_0 
+  sys.pixelp=[sys.focal*mu sys.focal*mv u0 v0]; % values for the parameters m_u m_v u_0 v_0 
                             % leave empty if sys.circularimage='yes' 
 waitbar(.1,f,'Loading the image data...');
 pause(1)

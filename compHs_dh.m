@@ -16,7 +16,7 @@ for i=1:N
   % initial estimate for Hs from correspondences xp<->x by linear algorithm with data normalization
   H0=homdltps_dh([xp x]);  
   %options=optimset('LargeScale','off','Algorithm','levenberg-marquardt', 'Display','iter','MaxFunEvals',10000,'TolX',1e-4,'TolFun',1e-4);
-   options_dh=optimoptions(@lsqnonlin,'Algorithm','levenberg-marquardt', 'Display','iter');
+   options_dh=optimoptions(@lsqnonlin,'Algorithm','levenberg-marquardt', 'Display','off');
   [H,resnorm,res]=lsqnonlin(@homangleerr_dh,H0,[],[],options_dh,x,xp);
 % [H]=lsqnonlin(@homangleerr_dh,H0,[],[],options_dh,x,xp);
    err_homo(i)=mean(abs(res));

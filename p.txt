@@ -1,24 +1,24 @@
 Some important log/camera calibration data:
-Average residual for fitting projecttype of perspective model: 0.000200132
+Average residual for fitting projecttype of perspective model: 0.0194438
 p0:
-  3.97	  1.66	188.68	188.68	320.00	240.00	
-Mean distance between measured and modelled centroids before nonlinear minimization: 0.0431 pixels
-RMS distance between measured and modelled centroids: 0.0488 pixels
+  1.00	 11.09	631.58	631.58	320.00	240.00	
+Mean distance between measured and modelled centroids before nonlinear minimization: 0.3168 pixels
+RMS distance between measured and modelled centroids: 0.3772 pixels
 Standard deviation of the residuals:
-  sigma_u: 0.0344 pixels
-  sigma_v: 0.0346 pixels
-Radial projection curve is increasing up to 39.000000 degrees.
-The initial value for thetamax given in calibconfig.m was 38.660000 degrees,
+  sigma_u: 0.2674 pixels
+  sigma_v: 0.2664 pixels
+Radial projection curve is increasing up to 32.500000 degrees.
+The initial value for thetamax given in calibconfig.m was 35.000000 degrees,
 The backward model error:
-  maximum reprojection error: 4.519677e-12 pixels
-  mean reprojection error: 1.840922e-13 pixels
+  maximum reprojection error: 8.341856e-12 pixels
+  mean reprojection error: 1.697231e-13 pixels
 
-para1=4.02603#
-para2=0.916296#
-para3=188.885#
-para4=189.17#
-para5=324.567#
-para6=202.824#
-para7=-0.0787415#
-para8=7.91841#
-para9=-27.3744#
+para1=1#
+para2=0#
+para3=716.154#
+para4=715.309#
+para5=297.421#
+para6=279.72#
+para7=-2.32279#
+para8=14.0926#
+para9=-31.9807#

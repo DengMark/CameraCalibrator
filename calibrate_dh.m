@@ -32,7 +32,7 @@ function [p,Rs,ts,err]=calibrate_dh(sys,ms,xs,pinit)
 %    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 %    GNU General Public License for more details.
 
-
+clc
 global f
 global p0 Rs0 ts0
 global meanerr rmserr su sv thetamax_first thetamax maxd meand
@@ -50,22 +50,24 @@ else
   thetamax=sys.viewfield/2*pi/180;
 end
 p0=pinit;
+disp('Initial p')
+disp(p0)
 waitbar(.5,f,'Back-projection and computation of homographies...');
 pause(1)
-% disp('Computation of homographies...');
+disp('Computation of homographies...');
 [Hs, err_homo]=compHs_dh(p0,ms,xs,[]);
 %err_single=err_single
-% fprintf('err:%g\n',err_single)
+fprintf('mean err:%g\n',mean(err_homo))
 K=eye(3);
 waitbar(.6,f,'Initialization of external parameters...');
 pause(1)
-% disp('Initialises the external camera parameters...');
+disp('Initialises the external camera parameters...');
 [Rs0,ts0]=initialiseexternalp_dh(Hs,K,sys.cata);
 
 waitbar(.7,f,'Computation of projection error...');
 pause(1)
 disp('Computation of projection error...');
-[err_b,meanerr]=projerrs_dh(ms,xs,p0,Rs0,ts0,sys.blobradius);
+[~,meanerr]=projerrs_dh(ms,xs,p0,Rs0,ts0,sys.blobradius);
 
 %keyboard;
 waitbar(.8,f,sprintf('Error between measured and modelled points\n %.4f pixels',meanerr));
@@ -80,12 +82,11 @@ waitbar(.9,f,'Optimise the total camera parameters...');
 pause(1)
 %最优化算法
 [p,Rs,ts]=minimiseprojerrs_dh(ms,xs,p0,Rs0,ts0,sys.model,0);
-p=p
 
 % if the initial guess is bad the general radially symmetric
 % projection may give negative values for r and we need the
 % following correction
-if p(1)<0 | (p(1)==0 & p(2)<0)
+if p(1)<0 || (p(1)==0 && p(2)<0)
   disp('In calibcomp: Radius must be positive');
   p(1)=-p(1); p(2)=-p(2);
   S=[-1 0 0; 0 -1 0; 0 0 1];
@@ -115,6 +116,9 @@ fprintf(1,' %.4f pixels\n',meanerr);
 
 disp('RMS distance between measured and modelled centroids:')
 fprintf(1,' %.4f pixels\n',rmserr);
+
+disp('Median distance between measured and modelled centroids:')
+fprintf(1,' %.4f pixels\n',mederr);
 
 disp('Standard deviation of the residuals:');
 fprintf(1,'sigma_u: %.4f pixels\n',su);
