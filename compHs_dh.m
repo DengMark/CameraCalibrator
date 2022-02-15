@@ -13,6 +13,10 @@ N=length(ms);  % total N views
 for i=1:N
   x=generic2sphere_dh(ms{i},p,thetamax);
   xp=[xs{i} ones(size(xs{i},1),1)];
+  if any(isnan(x),'all')
+      fprintf(1,'Please remove image number %.4f\n',i);
+      continue
+  end
   % initial estimate for Hs from correspondences xp<->x by linear algorithm with data normalization
   H0=homdltps_dh([xp x]);  
   %options=optimset('LargeScale','off','Algorithm','levenberg-marquardt', 'Display','iter','MaxFunEvals',10000,'TolX',1e-4,'TolFun',1e-4);

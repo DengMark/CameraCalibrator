@@ -22,7 +22,7 @@ function varargout = calibrate_main(varargin)
 
 % Edit the above text to modify the response to help calibrate_main
 
-% Last Modified by GUIDE v2.5 13-May-2019 16:31:31
+% Last Modified by GUIDE v2.5 06-Feb-2022 16:55:23
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -618,5 +618,13 @@ set(hObject,'ytick',[]);
 % --------------------------------------------------------------------
 function Untitled_1_Callback(hObject, eventdata, handles)
 % hObject    handle to Untitled_1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over image_listbox.
+function image_listbox_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to image_listbox (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)

@@ -40,7 +40,7 @@ par0=par0(2:end);
 %keyboard
 %save par0_v22 par0
 
-options=optimset('LargeScale','off','Algorithm','levenberg-marquardt','Display','off', 'TolFun',1e-6,'TolX',1e-6,'MaxFunEvals',30000,'MaxIter',1000);
+options=optimset('LargeScale','off','Algorithm','levenberg-marquardt','Display','iter', 'TolFun',1e-6,'TolX',1e-6,'MaxFunEvals',30000,'MaxIter',1000,'PlotFcn','optimplotresnorm');
 %options=optimset('LargeScale','off','LevenbergMarquardt','on','Display','iter', 'TolFun',1e-3,'TolX',1e-3,'MaxFunEvals',30000,'MaxIter',1000);
 %options=optimset('LargeScale','on','LevenbergMarquardt','off','Display','iter', 'TolFun',1e-4,'TolX',1e-4,'MaxFunEvals',30000,'MaxIter',1000);
 % 
@@ -50,13 +50,14 @@ options=optimset('LargeScale','off','Algorithm','levenberg-marquardt','Display',
 % disp(radius);
 
 lb=[];
-%lb = ones(size(par0))*-inf; lb(1)=0;
-%lb(2) = 600;lb(3)=600;
+%lb = ones(size(par0))*-inf;
+%lb(1)=0;
+%lb(2) = 725;lb(3)=725;
 
 if isempty(radius) | radius==0
   %disp('In minimiseprojerrs: control points are points with radius 0');
-  par=lsqnonlin('projerr_dh',par0,lb,[],options,ms,xs,PLEN);    
-  
+  [par,resnorm,residual,exitflag,output]=lsqnonlin('projerr_dh',par0,lb,[],options,ms,xs,PLEN);    
+  exitflag
 else
   [A,B,W]=makenintmats_dh(radius);
   %disp('In minimiseprojerrs: control points are circular');
